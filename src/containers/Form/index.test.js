@@ -22,7 +22,7 @@ describe("When Events is created", () => {
         })
       );
       await screen.findByText("En cours",{},{timeout: 1000});
-      await screen.findByText("Envoyer",{},{timeout: 5000});
+      await screen.findByText("Envoyer",{},{timeout: 2000});
       expect(onSuccess).toHaveBeenCalled();
     });
   });
