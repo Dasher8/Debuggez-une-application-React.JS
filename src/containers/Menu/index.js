@@ -18,7 +18,7 @@ const Menu = () => (
         <a href="#notre-equipe">Notre équipe</a>
       </li>
     </ul>
-    <Button title="contact" onClick={() => document.getElementById('contact').scrollIntoView()}>
+    <Button title="contact" onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>
       Contact
     </Button>
   </nav>

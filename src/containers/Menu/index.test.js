@@ -4,23 +4,27 @@ import Menu from "./index";
 describe("When Menu is created", () => {
   it("a list of mandatories links and the logo are displayed", async () => {
     render(<Menu />);
-    await screen.findByText("Nos services");
-    await screen.findByText("Nos réalisations");
-    await screen.findByText("Notre équipe");
-    await screen.findByText("Contact");
+    expect(screen.getByText("Nos services")).toBeInTheDocument();
+    expect(screen.getByText("Nos réalisations")).toBeInTheDocument();
+    expect(screen.getByText("Notre équipe")).toBeInTheDocument();
+    expect(screen.getByText("Contact")).toBeInTheDocument();
   });
 
   describe("and a click is triggered on contact button", () => {
-    it("document location  href change", async () => {
+    it("scroll to the contact section", async () => {
+      // Mock document.getElementById to return an element with scrollIntoView
+      const scrollIntoViewMock = jest.fn();
+      jest.spyOn(document, 'getElementById').mockReturnValue({
+        scrollIntoView: scrollIntoViewMock,
+      });
+
       render(<Menu />);
-      fireEvent(
-        await screen.findByText("Contact"),
-        new MouseEvent("click", {
-          cancelable: true,
-          bubbles: true,
-        })
-      );
-      expect(window.document.location.hash).toEqual("#contact");
+      fireEvent.click(screen.getByText("Contact"));
+
+      expect(scrollIntoViewMock).toHaveBeenCalledWith({ behavior: 'smooth' });
+
+      // Restore the original implementation
+      document.getElementById.mockRestore();
     });
   });
 });
