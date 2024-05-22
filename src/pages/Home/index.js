@@ -114,7 +114,7 @@ const Page = () => {
       </div>
     </main>
     <footer className="row">
-      <div className="col presta">
+     {last && <div className="col presta">
         <h3>Notre derniére prestation</h3>
         <EventCard
           imageSrc={last?.cover}
@@ -123,7 +123,7 @@ const Page = () => {
           small
           label="boom"
         />
-      </div>
+      </div>}
       <div className="col contact">
         <h3>Contactez-nous</h3>
         <address>45 avenue de la République, 75000 Paris</address>
